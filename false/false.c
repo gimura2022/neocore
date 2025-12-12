@@ -18,6 +18,9 @@
 #include <stdio.h>
 #include <getopt.h>
 
+/* patch number */
+#define PATCH "0"
+
 /* usage message */
 #define USAGE	"usage: false [--help | --version] OPTION...\n"		\
 		"	--help		print this message and exit\n"	\
@@ -46,7 +49,7 @@ int main(int argc, char* argv[])
 		return 0;
 
 	case 'v':
-		puts("false (neocore " NEOCORE_VERSION ")");
+		puts("neocore false " NEOCORE_VERSION "+" PATCH);
 		puts("written by gimura");
 
 		return 0;
