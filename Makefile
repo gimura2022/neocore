@@ -1,6 +1,6 @@
 include config.mk
 
-export CFLAGS = -D'NEOCORE_VERSION="$(VERSION)"' -g
+export CFLAGS += -D'NEOCORE_VERSION="$(VERSION)"'
 
 export POSTFIX ?= usr/local
 export DESTDIR ?= /
