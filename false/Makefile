@@ -9,36 +9,25 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# Makefile - build script for neocore
-
-include config.mk
-
-export CFLAGS += -D'NEOCORE_VERSION="$(VERSION)"'
+# Makefile - build script for false
 
 DESTDIR ?= /
 
-SUBDIRS :=	true	\
-		false
-
 .PHONY: all
-all: $(SUBDIRS)
-
-.PHONY: $(SUBDIRS)
-$(SUBDIRS):
-	$(MAKE) -C $@ all
+all: false
 
 .PHONY: clean
 clean:
-	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
-
-define install_subdirs
-	for dir in $(SUBDIRS); do $(MAKE) DESTDIR=$(shell realpath $(DESTDIR)) -C $$dir $(1); done
-endef
+	$(RM) false
 
 .PHONY: install
-install:
-	$(call install_subdirs, $@)
+install: all
+	install -d $(DESTDIR)/bin/
+	install -m 775 false $(DESTDIR)/bin/
+	install -d $(DESTDIR)/share/man/man1/
+	install -m 644 false.1 $(DESTDIR)/share/man/man1/
 
 .PHONY: uninstall
 uninstall:
-	$(call install_subdirs, $@)
+	$(RM) $(DESTDIR)/bin/false
+	$(RM) $(DESTDIR)/share/man/man1/false.1

@@ -11,4 +11,4 @@
 
 # config.mk - configuration for neocore build script
 
-VERSION = 0.1
+VERSION = 0.2
