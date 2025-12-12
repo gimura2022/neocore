@@ -11,7 +11,6 @@
 
 # Makefile - build script for true
 
-POSTFIX ?= usr/local
 DESTDIR ?= /
 
 .PHONY: all
@@ -23,12 +22,12 @@ clean:
 
 .PHONY: install
 install: all
-	install -d $(DESTDIR)$(POSTFIX)/bin/
-	install -m 775 true $(DESTDIR)$(POSTFIX)/bin/
-	install -d $(DESTDIR)$(POSTFIX)/share/man/man1/
-	install -m 644 true.1 $(DESTDIR)$(POSTFIX)/share/man/man1/
+	install -d $(DESTDIR)/bin/
+	install -m 775 true $(DESTDIR)/bin/
+	install -d $(DESTDIR)/share/man/man1/
+	install -m 644 true.1 $(DESTDIR)/share/man/man1/
 
 .PHONY: uninstall
 uninstall:
-	$(RM) $(DESTDIR)$(POSTFIX)/bin/true
-	$(RM) $(DESTDIR)$(POSTFIX)/share/man/man1/true.1
+	$(RM) $(DESTDIR)/bin/true
+	$(RM) $(DESTDIR)/share/man/man1/true.1
