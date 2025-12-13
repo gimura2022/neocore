@@ -22,7 +22,7 @@
 #include "err.h"
 
 /* patch number */
-#define PATCH "2"
+#define PATCH "3"
 
 /* formatting settings */
 static bool sysname	= false;
@@ -49,16 +49,16 @@ static void display(void)
 }
 
 /* usage text */
-#define USAGE_SMALL	"usage: uname [-snrvma][--help | --version]\n"
-#define USAGE		"	-s		display system name (set by default)\n"	\
-			"	-n		display node name\n"			\
-			"	-r		display release\n"			\
-			"	-v		display version\n"			\
-			"	-m		display machine\n"			\
-			"	-a		display all\n"				\
-			"	--help		print this message and exit\n"		\
-			"	--version	print version and exit\n"		\
-			"\n"								\
+#define USAGE_SMALL	"usage: uname [OPTION]\n"
+#define USAGE		"	-s	--kernel		display system name (set by default)\n"	\
+			"	-n	--nodename		display node name\n"			\
+			"	-r	--kernel-release	display release\n"			\
+			"	-v	--kernel-version	display version\n"			\
+			"	-m	--arch			display machine\n"			\
+			"	-a	--all			display all\n"				\
+			"		--help			print this message and exit\n"		\
+			"		--version		print version and exit\n"		\
+			"\n"										\
 			"return system information\n"
 
 /* print usage */
@@ -73,22 +73,28 @@ int neocore_main(int argc, char* argv[])
 	int c, opt = 0;
 
 	static const struct option options[] = {
-		{ "help",	no_argument,	0,	'h' },
-		{ "version",	no_argument,	0,	'V' },
+		{ "kernel",		no_argument,	0,	's' },
+		{ "nodename",		no_argument,	0,	'n' },
+		{ "kernel-release",	no_argument,	0,	'r' },
+		{ "kernel-version",	no_argument,	0,	'v' },
+		{ "arch",		no_argument,	0,	'm' },
+		{ "all",		no_argument,	0,	'a' },
+		{ "help",		no_argument,	0,	'h' },
+		{ "version",		no_argument,	0,	'V' },
 		{ 0, 0, 0, 0 },
 	};
 
 	opterr = false;
 
 	while ((c = getopt_long(argc, argv, "snrvma", options, &opt)) != -1) switch (c) {
-	/* set formatting flags */
+	/* formatting flags */
 	case 's': sysname = true; break;
 	case 'n': nodename = true; break;
 	case 'r': release = true; break;
 	case 'v': version = true; break;
 	case 'm': machine = true; break;
 
-	/* all flags */
+	/* --all */
 	case 'a':
 		sysname = true;
 		nodename = true;
@@ -110,6 +116,7 @@ int neocore_main(int argc, char* argv[])
 		usage(stdout, false);
 		return 0;
 
+	/* invalid argument */
 	case '?':
 		warnx("invalid argument");
 		usage(stderr, true);
