@@ -11,6 +11,11 @@
 
 # Makefile - build script for libneocore
 
+DESTDIR ?= /
+PREFIX ?= usr/local
+
+INSTALLPATH := $(DESTDIR)$(PREFIX)
+
 OBJS :=	err.o	\
 	rt.o
 
@@ -28,3 +33,12 @@ clean:
 	$(RM) $(OBJS)
 	$(RM) libneocore.a
 	$(RM) libneocore.so
+
+.PHONY: install
+install: all
+	install -d $(INSTALLPATH)/lib/
+	install -m 775 libneocore.so $(INSTALLPATH)/lib/
+
+.PHONY: uninstall
+uninstall:
+	$(RM) $(INSTALLPATH)/lib/libneocore.so
