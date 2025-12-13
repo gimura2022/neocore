@@ -9,6 +9,28 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# config.mk - configuration for neocore build script
+# application.mk - application template
 
-VERSION = 0.4
+DESTDIR ?= /
+PREFIX ?= usr/local
+
+INSTALLPATH := $(DESTDIR)$(PREFIX)
+
+.PHONY: all
+all: $(NAME)
+
+.PHONY: clean
+clean:
+	$(RM) $(NAME)
+
+.PHONY: install
+install: all
+	install -d $(INSTALLPATH)/bin/
+	install -m 775 $(NAME) $(INSTALLPATH)/bin/
+	install -d $(INSTALLPATH)/share/man/man1/
+	install -m 644 $(NAME).1 $(INSTALLPATH)/share/man/man1/
+
+.PHONY: uninstall
+uninstall:
+	$(RM) $(INSTALLPATH)/bin/$(NAME)
+	$(RM) $(INSTALLPATH)/share/man/man1/$(NAME).1

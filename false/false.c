@@ -19,7 +19,7 @@
 #include <getopt.h>
 
 /* patch number */
-#define PATCH "0"
+#define PATCH "1"
 
 /* usage message */
 #define USAGE	"usage: false [--help | --version] OPTION...\n"		\
@@ -30,7 +30,7 @@
 		"return false value\n"
 
 /* entry point */
-int main(int argc, char* argv[])
+int neocore_main(int argc, char* argv[])
 {
 	int c, opt = 0;
 

@@ -16,15 +16,13 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <getopt.h>
 #include <sys/utsname.h>
 
-/* patch number */
-#define PATCH "0"
+#include "err.h"
 
-/* calling name */
-static const char* invocation_name;
+/* patch number */
+#define PATCH "2"
 
 /* formatting settings */
 static bool sysname	= false;
@@ -38,11 +36,8 @@ static void display(void)
 {
 	struct utsname info;
 
-	if (uname(&info) < 0) {
-		printf("%s: ", invocation_name);
-		perror("uname");
-		exit(1);
-	}
+	if (uname(&info) < 0)
+		err(1, "uname");
 
 	if (sysname)	printf("%s ", info.sysname);
 	if (nodename)	printf("%s ", info.nodename);
@@ -69,15 +64,13 @@ static void display(void)
 /* print usage */
 static void usage(FILE* stream, bool small)
 {
-	fprintf(stream, small ? USAGE_SMALL : USAGE_SMALL USAGE);
+	fputs(small ? USAGE_SMALL : USAGE_SMALL USAGE, stream);
 }
 
 /* entry point */
-int main(int argc, char* argv[])
+int neocore_main(int argc, char* argv[])
 {
 	int c, opt = 0;
-
-	invocation_name = argv[0];
 
 	static const struct option options[] = {
 		{ "help",	no_argument,	0,	'h' },
@@ -118,7 +111,7 @@ int main(int argc, char* argv[])
 		return 0;
 
 	case '?':
-		fprintf(stderr, "%s: invalid argument\n", invocation_name);
+		warnx("invalid argument");
 		usage(stderr, true);
 
 		return 1;

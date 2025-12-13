@@ -13,26 +13,4 @@
 
 NAME := false
 
-DESTDIR ?= /
-PREFIX ?= usr/local
-
-INSTALLPATH := $(DESTDIR)$(PREFIX)
-
-.PHONY: all
-all: $(NAME)
-
-.PHONY: clean
-clean:
-	$(RM) $(NAME)
-
-.PHONY: install
-install: all
-	install -d $(INSTALLPATH)/bin/
-	install -m 775 $(NAME) $(INSTALLPATH)/bin/
-	install -d $(INSTALLPATH)/share/man/man1/
-	install -m 644 $(NAME).1 $(INSTALLPATH)/share/man/man1/
-
-.PHONY: uninstall
-uninstall:
-	$(RM) $(INSTALLPATH)/bin/$(NAME)
-	$(RM) $(INSTALLPATH)/share/man/man1/$(NAME).1
+include ../make/application.mk

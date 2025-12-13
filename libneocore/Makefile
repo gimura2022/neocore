@@ -9,6 +9,22 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# config.mk - configuration for neocore build script
+# Makefile - build script for libneocore
 
-VERSION = 0.4
+OBJS :=	err.o	\
+	rt.o
+
+.PHONY: all
+all: libneocore.a libneocore.so
+
+libneocore.a: $(OBJS)
+	$(AR) -rcs $@ $(OBJS)
+
+libneocore.so: $(OBJS)
+	$(CC) -o $@ $(OBJS) -shared
+
+.PHONY: clean
+clean:
+	$(RM) $(OBJS)
+	$(RM) libneocore.a
+	$(RM) libneocore.so
