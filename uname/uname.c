@@ -88,12 +88,14 @@ int main(int argc, char* argv[])
 	opterr = false;
 
 	while ((c = getopt_long(argc, argv, "snrvma", options, &opt)) != -1) switch (c) {
+	/* set formatting flags */
 	case 's': sysname = true; break;
 	case 'n': nodename = true; break;
 	case 'r': release = true; break;
 	case 'v': version = true; break;
 	case 'm': machine = true; break;
 
+	/* all flags */
 	case 'a':
 		sysname = true;
 		nodename = true;
@@ -103,12 +105,14 @@ int main(int argc, char* argv[])
 
 		break;
 
+	/* --version */
 	case 'V':
 		puts("neocore uname " NEOCORE_VERSION "+" PATCH);
 		puts("written by gimura");
 
 		return 0;
 
+	/* --help */
 	case 'h':
 		usage(stdout, false);
 		return 0;
