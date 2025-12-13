@@ -1,0 +1,71 @@
+\" Permission to use, copy, modify, and/or distribute this software for
+\" any purpose with or without fee is hereby granted.
+\"
+\" THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+\" WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+\" OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
+\" FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
+\" DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+\" AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+\" OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+\"
+\" uname.1 - man page for uname
+.
+.TH UNAME 1 "13 Dec 2025" neocore
+.
+.SH NAME
+uname \- return system information
+.
+.SH SYNOPSIS
+.B uname
+[\fI\,-snrvm\/\fR]
+[\fI\,--help \/\fR|\fI\, --version\/\fR]
+.br
+.
+.SH DESCRIPTION
+Return system information from \fBuname\fP(2).
+If arguments not set, display system name,
+otherwise display values from arguments.
+.
+.SH OPTIONS
+.TP
+\fB\-s\fR
+display system name
+.TP
+\fB\-n\fR
+display node name
+.TP
+\fB\-r\fR
+display release
+.TP
+\fB\-v\fR
+display version
+.TP
+\fB\-m\fR
+display machine
+.TP
+\fB\-a\fR
+display all
+.TP
+\fB\-\-help\fR
+display help message and exit
+.TP
+\fB\-\-version\fR
+print version and exit
+.
+.SH EXIT STATUS
+.TP
+\fB0\fR
+sucess
+.TP
+\fB1\fR
+uname or invalid argument error
+.
+.SH STANDARTS
+POSIX.1-2008
+.
+.SH AUTHORS
+Written by gimura.
+.
+.SH SEE ALSO
+\fBuname\fP(2)

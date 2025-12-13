@@ -1,0 +1,130 @@
+/* Permission to use, copy, modify, and/or distribute this software for
+ * any purpose with or without fee is hereby granted.
+
+ * THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+ * WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
+ * FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
+ * DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+ * AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+ * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. */
+
+/* uname.c - return system name */
+
+/* define posix version as POSIX.1-2008 */
+#define _POSIX_C_SOURCE 200809L
+
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <getopt.h>
+#include <sys/utsname.h>
+
+/* patch number */
+#define PATCH "0"
+
+/* calling name */
+static const char* invocation_name;
+
+/* formatting settings */
+static bool sysname	= false;
+static bool nodename	= false;
+static bool release	= false;
+static bool version	= false;
+static bool machine	= false;
+
+/* display system info */
+static void display(void)
+{
+	struct utsname info;
+
+	if (uname(&info) < 0) {
+		printf("%s: ", invocation_name);
+		perror("uname");
+		exit(1);
+	}
+
+	if (sysname)	printf("%s ", info.sysname);
+	if (nodename)	printf("%s ", info.nodename);
+	if (release)	printf("%s ", info.release);
+	if (version)	printf("%s ", info.version);
+	if (machine)	printf("%s ", info.machine);
+
+	putc('\n', stdout);
+}
+
+/* usage text */
+#define USAGE_SMALL	"usage: uname [-snrvma][--help | --version]\n"
+#define USAGE		"	-s		display system name (set by default)\n"	\
+			"	-n		display node name\n"			\
+			"	-r		display release\n"			\
+			"	-v		display version\n"			\
+			"	-m		display machine\n"			\
+			"	-a		display all\n"				\
+			"	--help		print this message and exit\n"		\
+			"	--version	print version and exit\n"		\
+			"\n"								\
+			"return system information\n"
+
+/* print usage */
+static void usage(FILE* stream, bool small)
+{
+	fprintf(stream, small ? USAGE_SMALL : USAGE_SMALL USAGE);
+}
+
+/* entry point */
+int main(int argc, char* argv[])
+{
+	int c, opt = 0;
+
+	invocation_name = argv[0];
+
+	static const struct option options[] = {
+		{ "help",	no_argument,	0,	'h' },
+		{ "version",	no_argument,	0,	'V' },
+		{ 0, 0, 0, 0 },
+	};
+
+	opterr = false;
+
+	while ((c = getopt_long(argc, argv, "snrvma", options, &opt)) != -1) switch (c) {
+	case 's': sysname = true; break;
+	case 'n': nodename = true; break;
+	case 'r': release = true; break;
+	case 'v': version = true; break;
+	case 'm': machine = true; break;
+
+	case 'a':
+		sysname = true;
+		nodename = true;
+		release = true;
+		version = true;
+		machine = true;
+
+		break;
+
+	case 'V':
+		puts("neocore uname " NEOCORE_VERSION "+" PATCH);
+		puts("written by gimura");
+
+		return 0;
+
+	case 'h':
+		usage(stdout, false);
+		return 0;
+
+	case '?':
+		fprintf(stderr, "%s: invalid argument\n", invocation_name);
+		usage(stderr, true);
+
+		return 1;
+	}
+
+	/* if other formatting options doesn't enabled enable system name */
+	if (!nodename && !release && !version && !machine)
+		sysname = true;
+
+	display();
+
+	return 0;
+}

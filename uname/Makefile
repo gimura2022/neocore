@@ -9,6 +9,25 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# config.mk - configuration for neocore build script
+# Makefile - build script for uname
 
-VERSION = 0.3
+DESTDIR ?= /
+
+.PHONY: all
+all: uname
+
+.PHONY: clean
+clean:
+	$(RM) uname
+
+.PHONY: install
+install: all
+	install -d $(DESTDIR)/bin/
+	install -m 775 uname $(DESTDIR)/bin/
+	install -d $(DESTDIR)/share/man/man1/
+	install -m 644 uname.1 $(DESTDIR)/share/man/man1/
+
+.PHONY: uninstall
+uninstall:
+	$(RM) $(DESTDIR)/bin/uname
+	$(RM) $(DESTDIR)/share/man/man1/uname.1

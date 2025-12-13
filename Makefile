@@ -18,7 +18,8 @@ export CFLAGS += -D'NEOCORE_VERSION="$(VERSION)"'
 DESTDIR ?= /
 
 SUBDIRS :=	true	\
-		false
+		false	\
+		uname
 
 .PHONY: all
 all: $(SUBDIRS)
