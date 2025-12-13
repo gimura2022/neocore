@@ -11,23 +11,28 @@
 
 # Makefile - build script for false
 
+NAME := false
+
 DESTDIR ?= /
+PREFIX ?= usr/local
+
+INSTALLPATH := $(DESTDIR)$(PREFIX)
 
 .PHONY: all
-all: false
+all: $(NAME)
 
 .PHONY: clean
 clean:
-	$(RM) false
+	$(RM) $(NAME)
 
 .PHONY: install
 install: all
-	install -d $(DESTDIR)/bin/
-	install -m 775 false $(DESTDIR)/bin/
-	install -d $(DESTDIR)/share/man/man1/
-	install -m 644 false.1 $(DESTDIR)/share/man/man1/
+	install -d $(INSTALLPATH)/bin/
+	install -m 775 $(NAME) $(INSTALLPATH)/bin/
+	install -d $(INSTALLPATH)/share/man/man1/
+	install -m 644 $(NAME).1 $(INSTALLPATH)/share/man/man1/
 
 .PHONY: uninstall
 uninstall:
-	$(RM) $(DESTDIR)/bin/false
-	$(RM) $(DESTDIR)/share/man/man1/false.1
+	$(RM) $(INSTALLPATH)/bin/$(NAME)
+	$(RM) $(INSTALLPATH)/share/man/man1/$(NAME).1

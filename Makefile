@@ -16,6 +16,7 @@ include config.mk
 export CFLAGS += -D'NEOCORE_VERSION="$(VERSION)"'
 
 DESTDIR ?= /
+PREFIX ?= usr/local
 
 SUBDIRS :=	true	\
 		false	\
@@ -33,7 +34,7 @@ clean:
 	for dir in $(SUBDIRS); do $(MAKE) -C $$dir $@; done
 
 define install_subdirs
-	for dir in $(SUBDIRS); do $(MAKE) DESTDIR=$(shell realpath $(DESTDIR)) -C $$dir $(1); done
+	for dir in $(SUBDIRS); do $(MAKE) DESTDIR=$(shell realpath $(DESTDIR))/ PREFIX=$(PREFIX) -C $$dir $(1); done
 endef
 
 .PHONY: install

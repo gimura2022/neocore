@@ -11,23 +11,28 @@
 
 # Makefile - build script for uname
 
+NAME := uname
+
 DESTDIR ?= /
+PREFIX ?= usr/local
+
+INSTALLPATH := $(DESTDIR)$(PREFIX)
 
 .PHONY: all
-all: uname
+all: $(NAME)
 
 .PHONY: clean
 clean:
-	$(RM) uname
+	$(RM) $(NAME)
 
 .PHONY: install
 install: all
-	install -d $(DESTDIR)/bin/
-	install -m 775 uname $(DESTDIR)/bin/
-	install -d $(DESTDIR)/share/man/man1/
-	install -m 644 uname.1 $(DESTDIR)/share/man/man1/
+	install -d $(INSTALLPATH)/bin/
+	install -m 775 $(NAME) $(INSTALLPATH)/bin/
+	install -d $(INSTALLPATH)/share/man/man1/
+	install -m 644 $(NAME).1 $(INSTALLPATH)/share/man/man1/
 
 .PHONY: uninstall
 uninstall:
-	$(RM) $(DESTDIR)/bin/uname
-	$(RM) $(DESTDIR)/share/man/man1/uname.1
+	$(RM) $(INSTALLPATH)/bin/$(NAME)
+	$(RM) $(INSTALLPATH)/share/man/man1/$(NAME).1
