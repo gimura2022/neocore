@@ -1,61 +1,94 @@
 utilites to do:
-- chgrp
-- chown
-- chmod
-- cp
-- dd
-- df
-- ln
-- ls
-- mkdir
-- mkfifo
-- mv
-- rm
-- realpath
-- rmdir
-- touch
-- cat
-- cksum
-- comm
-- csplit
-- cut
-- expand
-- fold
-- head
-- join
-- nl
-- od
-- paste
-- pr
-- sort
-- split
-- tail
-- tr
-- tsort
-- unexpand
-- uniq
-- wc
-- basename
-- date
-- dirname
-- du
-- echo
+- adduser
+- useradd
+- delgroup
+- deluser
+- groupdel
+- userdel
+- id
+- passwd
+- su
+- who
+- whoami
+
+- sh (nsh)
 - env
 - expr
-- id
-- link
-- logname
+- sleep
+- test
+
+- kill
 - nice
 - nohup
-- pathchk
-- printf
+- ps
+- xargs
+
+- basename
+- dirname
 - pwd
+
+- bc
+
+- cal
+- date
+
+- chgrp
+- chmod
+- chown
+
+- cmp
+- ar
+- cp
+- dd
+- fsync
+- install
+- ln
+- mkdir
+- mkfifo
+- mknod
+- mv
+- od
+- rm
+- rmdir
+- touch
+
+- cksum
+- df
+- du
+- find
+- ls
 - readlink
-- sleep
-- stty
+
+- clear
+- cat
+- comm
+- cut
+- diff
+- echo
+- ed
+- expand
+- unexpand
+- fold
+- grep
+- head
+- patch
+- printf
+- sed
+- sort
+- split
+- strings
+- tail
 - tee
-- test
-- timeout
-- tty
-- unlink
-- who
+- vi
+- wc
+- yes
+
+- getty
+- stty
+- mount
+- umount
+- sync
+
+- less
+- more
+- man
