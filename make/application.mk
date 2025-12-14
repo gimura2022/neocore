@@ -27,10 +27,10 @@ clean:
 install: all
 	install -d $(INSTALLPATH)/bin/
 	install -m 775 $(NAME) $(INSTALLPATH)/bin/
-	install -d $(INSTALLPATH)/share/man/man1/
-	install -m 644 $(NAME).1 $(INSTALLPATH)/share/man/man1/
+	install -d $(INSTALLPATH)/usr/share/man/man1/
+	install -m 644 $(NAME).1 $(INSTALLPATH)/usr/share/man/man1/
 
 .PHONY: uninstall
 uninstall:
 	$(RM) $(INSTALLPATH)/bin/$(NAME)
-	$(RM) $(INSTALLPATH)/share/man/man1/$(NAME).1
+	$(RM) $(INSTALLPATH)/usr/share/man/man1/$(NAME).1
