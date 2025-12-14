@@ -19,21 +19,35 @@ usage()
 options:
 	--debug		configure CFLAGS for debugging
 	--help		print this message
+	--nodefault	exclude all utilites from compilation
+	--core		include core utilites to compilation
+	--all		include all utilites to compilation
 
 envrionments:
 	CC		c compiler (cc by default)
 	CFLAGS		c compiler flags
 	LDFLAGS		linker flags
-	CPPFLAGS	c preprocessor flags"
+	CPPFLAGS	c preprocessor flags
+	INCLUDE		aditional utilites to compile
+	DESTDIR		installation destination directory (by default /)
+	PREFIX		installation path inside destination directory (by default empty)"
 
 	exit 0
 }
+
+CORE="true false uname wc"
 
 while test $# -gt 0; do
 	case "$1" in
 		--help) usage
 			;;
-		--debug) CFLAGS=${CFLAGS:--g -O0 -fsanitize=address}
+		--debug) CFLAGS="${CFLAGS} -g -fsanitize=address -O0"
+			;;
+		--nodefault) SUBDIRS=" "
+			;;
+		--core) SUBDIRS="${SUBDIRS} ${CORE}"
+			;;
+		--all) SUBDIRS="${CORE}"
 			;;
 	esac
 	shift
@@ -43,5 +57,9 @@ CC=${CC:-cc}
 CFLAGS=${CFLAGS:-}
 LDFLAGS=${LDFLAGS:-}
 CPPFLAGS=${CPPFLAGS:-}
+INCLUDE=${INCLUDE:-}
+SUBDIRS=${SUBDIRS:-${CORE}}
+DESTDIR=${DESTDIR:-/}
+PREFIX=${PREFIX:-}
 
 eval "echo \"$(cat config.mk.in)\"" > config.mk

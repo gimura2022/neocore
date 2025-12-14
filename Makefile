@@ -17,14 +17,7 @@ export CFLAGS	+= -D'NEOCORE_VERSION="$(VERSION)"' -fPIC
 export CPPFLAGS	+= -I$(shell realpath libneocore/include)
 export LDFLAGS	+= -L$(shell realpath libneocore/) -lneocore
 
-DESTDIR ?= /
-PREFIX ?= usr/local
-
-SUBDIRS :=	libneocore	\
-		true		\
-		false		\
-		uname		\
-		wc
+SUBDIRS := libneocore $(CONFIG_SUBDIRS)
 
 .PHONY: all
 all: $(SUBDIRS)

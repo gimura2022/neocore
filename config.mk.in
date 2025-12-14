@@ -11,9 +11,13 @@
 
 # config.mk.in - configuration template for neocore build script
 
-export VERSION = 0.5
+export VERSION = 0.6
 
-export CC 	= ${CC}
-export CFLAGS	= ${CFLAGS}
-export CPPFLAGS	= ${CPPFLAGS}
-export LDFLAGS	= ${LDFLAGS}
+export CC 		= ${CC}
+export CFLAGS		= ${CFLAGS}
+export CPPFLAGS		= ${CPPFLAGS}
+export LDFLAGS		= ${LDFLAGS}
+export CONFIG_SUBDIRS	= ${SUBDIRS} ${INCLUDE}
+
+DESTDIR	?= ${DESTDIR}
+PREFIX	?= ${PREFIX}
