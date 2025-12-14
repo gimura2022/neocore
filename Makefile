@@ -13,10 +13,9 @@
 
 include config.mk
 
-export CFLAGS	+=	-D'NEOCORE_VERSION="$(VERSION)"' -fPIC
-export CPPFLAGS	+=	-I$(shell realpath libneocore/include)
-export LDFLAGS	+=	-L$(shell realpath libneocore/)	\
-			-lneocore
+export CFLAGS	+= -D'NEOCORE_VERSION="$(VERSION)"' -fPIC
+export CPPFLAGS	+= -I$(shell realpath libneocore/include)
+export LDFLAGS	+= -L$(shell realpath libneocore/) -lneocore
 
 DESTDIR ?= /
 PREFIX ?= usr/local

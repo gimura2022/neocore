@@ -9,6 +9,39 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# config.mk - configuration for neocore build script
+# configure - configure build script
 
-VERSION = 0.5
+#!/bin/sh
+
+usage()
+{
+	echo "usage: configure [OPTION]...
+options:
+	--debug		configure CFLAGS for debugging
+	--help		print this message
+
+envrionments:
+	CC		c compiler (cc by default)
+	CFLAGS		c compiler flags
+	LDFLAGS		linker flags
+	CPPFLAGS	c preprocessor flags"
+
+	exit 0
+}
+
+while test $# -gt 0; do
+	case "$1" in
+		--help) usage
+			;;
+		--debug) CFLAGS=${CFLAGS:--g -O0 -fsanitize=address}
+			;;
+	esac
+	shift
+done
+
+CC=${CC:-cc}
+CFLAGS=${CFLAGS:-}
+LDFLAGS=${LDFLAGS:-}
+CPPFLAGS=${CPPFLAGS:-}
+
+eval "echo \"$(cat config.mk.in)\"" > config.mk
