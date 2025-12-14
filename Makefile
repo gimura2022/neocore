@@ -13,7 +13,7 @@
 
 include config.mk
 
-export CFLAGS	+=	-D'NEOCORE_VERSION="$(VERSION)"' -fPIC
+export CFLAGS	+=	-D'NEOCORE_VERSION="$(VERSION)"' -fPIC -g
 export CPPFLAGS	+=	-I$(shell realpath libneocore/include)
 export LDFLAGS	+=	-L$(shell realpath libneocore/)	\
 			-lneocore
@@ -24,7 +24,8 @@ PREFIX ?= usr/local
 SUBDIRS :=	libneocore	\
 		true		\
 		false		\
-		uname
+		uname		\
+		wc
 
 .PHONY: all
 all: $(SUBDIRS)

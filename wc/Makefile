@@ -9,6 +9,8 @@
 # AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
 # OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# config.mk - configuration for neocore build script
+# Makefile - build script for wc
 
-VERSION = 0.5
+NAME := wc
+
+include ../make/application.mk

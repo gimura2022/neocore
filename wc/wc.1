@@ -1,0 +1,66 @@
+\" Permission to use, copy, modify, and/or distribute this software for
+\" any purpose with or without fee is hereby granted.
+\"
+\" THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+\" WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+\" OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
+\" FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
+\" DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+\" AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+\" OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+\"
+\" wc.1 - man page for wc
+.
+.TH WC 1 "14 Dec 2025" neocore
+.
+.SH NAME
+wc \- display words, lines, bytes and chars count
+.
+.SH SYNOPSIS
+.B wc
+[\fI\,OPTION\/\fR]...
+[\fI\,FILES\/\fR]...
+.br
+.
+.SH DESCRIPTION
+Display words, lines, bytes and chars count.
+.PP
+If no files specified stdin used for an input. If as file specified "-"
+.B wc
+will use stdin.
+.PP
+If no options specified display lines, words and bytes count.
+.
+.SH OPTIONS
+.TP
+\fB\-c, \-\-bytes
+display bytes count
+.TP
+\fB\-l, \-\-lines
+display lines count
+.TP
+\fB\-m, \-\-chars
+display chars count
+.TP
+\fB\-w, \-\-words
+display words count
+.TP
+\fB\-\-help\fR
+display help message and exit
+.TP
+\fB\-\-version\fR
+print version and exit
+.
+.SH EXIT STATUS
+.TP
+\fB0\fR
+sucess
+.TP
+\fB1\fR
+an error occurred
+.
+.SH STANDARTS
+POSIX.1-2008
+.
+.SH AUTHORS
+Written by gimura.
