@@ -22,7 +22,7 @@
 #include "err.h"
 
 /* patch number */
-#define PATCH "3"
+#define PATCH "4"
 
 /* formatting settings */
 static bool sysname	= false;
@@ -121,6 +121,11 @@ int neocore_main(int argc, char* argv[])
 		warnx("invalid argument");
 		usage(stderr, true);
 
+		return 1;
+	}
+
+	if (optind != argc) {
+		warnx("extra operand \"%s\"", argv[optind]);
 		return 1;
 	}
 
